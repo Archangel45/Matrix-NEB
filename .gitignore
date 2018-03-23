@@ -1,6 +1,9 @@
 # NEB/plugin related config files
 *.json
 
+# NEB config file by itself
+*.conf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -55,3 +58,6 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Vim files
+*~
+*.un~
