@@ -24,12 +24,14 @@ log = logging.getLogger(name=__name__)
 # - Add other plugins as tests of plugin architecture (e.g. anagrams, dictionary lookup, etc)
 
 
-def generate_config(url, username, token, c_is, config_loc):
+def generate_config(url, username, token, admin, c_is, config_loc):
+    if not admin: # This bot has no admin if unspecified.
+        admin = []
     config = MatrixConfig(
             hs_url=url,
             user_id=username,
             access_token=token,
-            admins=[],
+            admins=admin,
             case_insensitive=c_is)
 
     save_config(config_loc, config)
@@ -134,7 +136,8 @@ if __name__ == '__main__':
                 hsurl = hsurl[:-1]
             username = raw_input("Full user ID (e.g. @user:domain): ").strip()
             token = raw_input("Access token: ").strip()
-            config = generate_config(hsurl, username, token, args.c_is, args.config)
+            admin = raw_input("Admin name(s) (bot owner(s). Seperate by commas. needs a full ID (e.g. @user:domain): ").replace(", ", ",").split(",")
+            config = generate_config(hsurl, username, token, admin, args.c_is, args.config)
     else:
         a.print_help()
         print "You probably want to run 'python neb.py -c neb.config'"
