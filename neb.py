@@ -24,13 +24,14 @@ log = logging.getLogger(name=__name__)
 # - Add other plugins as tests of plugin architecture (e.g. anagrams, dictionary lookup, etc)
 
 
-def generate_config(url, username, token, config_loc):
+def generate_config(url, username, token, c_is, config_loc):
     config = MatrixConfig(
             hs_url=url,
             user_id=username,
             access_token=token,
-            admins=[]
-    )
+            admins=[],
+            case_insensitive=c_is)
+
     save_config(config_loc, config)
     return config
 
@@ -109,6 +110,10 @@ if __name__ == '__main__':
         "-l", "--log-file", dest="log",
         help="Log to this file."
     )
+    a.add_argument(
+        "--case-insensitive", dest="c_is", action="store_true",
+        help="Whether or not use case-insensitivity on commands."
+    )
     args = a.parse_args()
 
     configure_logging(args.log)
@@ -129,7 +134,7 @@ if __name__ == '__main__':
                 hsurl = hsurl[:-1]
             username = raw_input("Full user ID (e.g. @user:domain): ").strip()
             token = raw_input("Access token: ").strip()
-            config = generate_config(hsurl, username, token, args.config)
+            config = generate_config(hsurl, username, token, args.c_is, args.config)
     else:
         a.print_help()
         print "You probably want to run 'python neb.py -c neb.config'"
