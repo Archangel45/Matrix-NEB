@@ -11,7 +11,7 @@ Setup
 =====
 Dependencies:
 * python2.7
-* matrix-client
+* matrix_client
 * flask
 * python-dateutil
 
