@@ -3,8 +3,18 @@ N E Bot
 
 This is a generic client bot for Matrix which supports plugins.
 
+This is the Python 3 version that is enhanced with the latest Matrix specification (r0.3.0)
+
+*NOTE*: Transitioning from Python 2 to 3 isn't yet done so you should still follow the setup below. By then, I will try my best to update the bot with the updated setup.
+
 Setup
 =====
+Dependencies:
+* python2.7
+* matrix-client
+* flask
+* python-dateutil
+
 Run:
 
     python neb.py -c <config location>
